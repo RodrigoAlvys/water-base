@@ -1,5 +1,11 @@
 # Water Base 💧
-Anotação pessoal com banco de dados NoSql
+Anotações pessoais com banco de dados NoSql
+
+## Tecnologias usados
+- HTML
+- javascript
+- REACT
+- firebase
 
 ## Acesso
 
