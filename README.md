@@ -3,7 +3,7 @@ Anotação pessoal com banco de dados NoSql
 
 ## Acesso
 
-[⛓Water Base](https://rodrigoalvys.github.io/water-base/)
+[⛓ Water Base](https://rodrigoalvys.github.io/water-base/)
 
 ## Estrutura do Bando de Dados(Firebase)
 
@@ -96,18 +96,18 @@ Armazena todas as anotações do usuário
 
 ### Usuário Comum (tipo: "comum")
 
-- Criar, editar e excluir suas próprias anotações
-- Visualizar apenas suas anotações
-- Não pode ver anotações de outros usuários
-- Não pode gerenciar perfis
+- ✅ Criar, editar e excluir suas próprias anotações
+- ✅ Visualizar apenas suas anotações
+- ❌ Não pode ver anotações de outros usuários
+- ❌ Não pode gerenciar perfis
 
 ### Administrador (tipo: "admin")
 
-- Todos os poderes do usuário comum
-- Visualizar todos os perfis cadastrados
-- Criar novos perfis (usuários)
-- Editar tipo de perfil (comum/admin)
-- Excluir perfis (exceto o próprio)
+- ✅ Todos os poderes do usuário comum
+- ✅ Visualizar todos os perfis cadastrados
+- ✅ Criar novos perfis (usuários)
+- ✅ Editar tipo de perfil (comum/admin)
+- ✅ Excluir perfis (exceto o próprio)
 
 ## Licença
 
