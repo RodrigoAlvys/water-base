@@ -1,16 +1,117 @@
-# React + Vite
+# Water Base 💧
+Anotação pessoal com banco de dados NoSql
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Acesso
 
-Currently, two official plugins are available:
+[⛓Water Base](https://rodrigoalvys.github.io/water-base/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Estrutura do Bando de Dados(Firebase)
 
-## React Compiler
+O banco de dados possui uma estrutura em árvore com um nó principal `profiles`, que armazena todos os perfis de usuários:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```json
+{
+    "profiles": {
+        "{uid_do_usuario}": {
+            "email": "usuario@exemplo.com",
+            "tipo": "comum",
+            "criadoEm": "2024-01-15T10:30:00.000Z",
+            "anotacoes": {
+                "{id_da_nota}": {
+                    "titulo": "Título da anotação",
+                    "conteudo": "Conteúdo da anotação...",
+                    "criadoEm": "2024-01-15T10:30:00.000Z",
+                    "atualizadoEm": "2024-01-15T14:20:00.000Z"
+                }
+            }
+        }
+    }
+}
+```
 
-## Expanding the ESLint configuration
+### Nó profiles
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Nó raiz que guarda tódos os perfis do sistema.
+
+|Nome|Tipo|
+|---|-----|
+|UID|Object|
+
+### Nó profiles/*UID*(perfis)
+
+Nó que contem dados no usuário.
+
+|Nome|Tipo|Obrigatório|Descrição|
+|----|----|-----------|---------|
+|email|string|sim|Email utilizado no login|
+|tipo|string|sim|Determina o nível de acesso: Comum e admin|
+|criadoem|string|sim|Data em que o perfil foi criado|
+|anotações|object|sim|Container das anotações do usuáiro|
+
+### Nó profiles/*UID*/anotacoes
+
+Armazena todas as anotações do usuário
+
+|Nome|tipo|Descrição|
+|----|----|---------|
+|Id_nota|Object|Identificador único da anotação
+
+| Campo | Tipo | Obrigatório | Descrição |
+|-------|------|-------------|-----------|
+| titulo | string | Sim | Título da anotação |
+| conteudo | string | Sim | Conteúdo/texto da anotação |
+| criadoEm | string (ISO 8601) | Sim | Data de criação da anotação |
+| atualizadoEm | string (ISO 8601) | Sim | Data da última edição |
+
+## Regras de Segurança (Firebase Realtime Database)
+
+```json
+{
+  "rules": {
+    "profiles": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$uid": {
+        ".read": "auth.uid === $uid || root.child('profiles/' + auth.uid + '/tipo').val() === 'admin'",
+        ".write": "auth.uid === $uid || root.child('profiles/' + auth.uid + '/tipo').val() === 'admin'"
+      }
+    }
+  }
+}
+```
+
+### Nó Profiles/*UID*/anotacoes/*Id_nota*
+
+Dados de uma anotação específica.
+
+### Explicação das regras:
+
+| Regra | Significado |
+|-------|-------------|
+| profiles/.read: "auth != null" | Usuários autenticados podem listar perfis |
+| profiles/.write: "auth != null" | Usuários autenticados podem escrever perfis |
+| $uid/.read: "auth.uid === $uid" | Usuário pode ler seu próprio perfil |
+| $uid/.read: "... root.child(...).val() === 'admin'" | Administradores podem ler qualquer perfil |
+| $uid/.write | Mesma lógica do read (próprio perfil ou admin) |
+
+##  Níveis de Acesso
+
+### Usuário Comum (tipo: "comum")
+
+- Criar, editar e excluir suas próprias anotações
+- Visualizar apenas suas anotações
+- Não pode ver anotações de outros usuários
+- Não pode gerenciar perfis
+
+### Administrador (tipo: "admin")
+
+- Todos os poderes do usuário comum
+- Visualizar todos os perfis cadastrados
+- Criar novos perfis (usuários)
+- Editar tipo de perfil (comum/admin)
+- Excluir perfis (exceto o próprio)
+
+## Licença
+
+MIT
+
