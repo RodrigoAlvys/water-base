@@ -6,11 +6,11 @@ Anotações pessoais com banco de dados NoSql
 - javascript
 - REACT
 - firebase
-
+  
 ## Acesso
 
 [⛓ Water Base](https://rodrigoalvys.github.io/water-base/)
-
+  
 ## Estrutura do Bando de Dados(Firebase)
 
 O banco de dados possui uma estrutura em árvore com um nó principal `profiles`, que armazena todos os perfis de usuários:
@@ -34,7 +34,7 @@ O banco de dados possui uma estrutura em árvore com um nó principal `profiles`
     }
 }
 ```
-
+  
 ### Nó profiles
 
 Nó raiz que guarda tódos os perfis do sistema.
@@ -42,7 +42,7 @@ Nó raiz que guarda tódos os perfis do sistema.
 |Nome|Tipo|
 |---|-----|
 |*UID*|Object|
-
+  
 ### Nó profiles/*UID*(perfis)
 
 Nó que contem dados no usuário.
@@ -53,7 +53,7 @@ Nó que contem dados no usuário.
 |Tipo|string|sim|Determina o nível de acesso: Comum e admin|
 |CriadoEm|string|sim|Data em que o perfil foi criado|
 |Anotações|object|sim|Container das anotações do usuáiro|
-
+  
 ### Nó profiles/*UID*/anotacoes
 
 Armazena todas as anotações do usuário
@@ -114,6 +114,18 @@ Armazena todas as anotações do usuário
 - ✅ Criar novos perfis (usuários)
 - ✅ Editar tipo de perfil (comum/admin)
 - ✅ Excluir perfis (exceto o próprio)
+
+## Imagens
+
+<img width="932" height="464" alt="login" src="https://github.com/user-attachments/assets/07aecd9a-0faf-40dc-a6cc-d7f227c8d906" />
+Login  
+<br><br>
+<img width="932" height="494" alt="Admin" src="https://github.com/user-attachments/assets/e49ac9d3-dc0a-4a7c-9a3a-ad26d7a8081f" />
+Página de admin  
+<br><br>
+<img width="932" height="494" alt="Perfil_comum" src="https://github.com/user-attachments/assets/1e04c93a-2628-4524-85e4-e04079eb7ef7" />
+Página de usuário  
+<br>
 
 ## Licença
 
