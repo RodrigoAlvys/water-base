@@ -35,18 +35,18 @@ Nó raiz que guarda tódos os perfis do sistema.
 
 |Nome|Tipo|
 |---|-----|
-|UID|Object|
+|*UID*|Object|
 
 ### Nó profiles/*UID*(perfis)
 
 Nó que contem dados no usuário.
 
 |Nome|Tipo|Obrigatório|Descrição|
-|----|----|-----------|---------|
-|email|string|sim|Email utilizado no login|
-|tipo|string|sim|Determina o nível de acesso: Comum e admin|
-|criadoem|string|sim|Data em que o perfil foi criado|
-|anotações|object|sim|Container das anotações do usuáiro|
+|----|----|:---------:|---------|
+|Email|string|sim|Email utilizado no login|
+|Tipo|string|sim|Determina o nível de acesso: Comum e admin|
+|CriadoEm|string|sim|Data em que o perfil foi criado|
+|Anotações|object|sim|Container das anotações do usuáiro|
 
 ### Nó profiles/*UID*/anotacoes
 
@@ -54,14 +54,16 @@ Armazena todas as anotações do usuário
 
 |Nome|tipo|Descrição|
 |----|----|---------|
-|Id_nota|Object|Identificador único da anotação
+|*Id_nota*|Object|Identificador único da anotação
+
+### Nó profiles/*UID*/anotacoes/*Id_nota*
 
 | Campo | Tipo | Obrigatório | Descrição |
-|-------|------|-------------|-----------|
+|-------|------|:-----------:|-----------|
 | titulo | string | Sim | Título da anotação |
 | conteudo | string | Sim | Conteúdo/texto da anotação |
-| criadoEm | string (ISO 8601) | Sim | Data de criação da anotação |
-| atualizadoEm | string (ISO 8601) | Sim | Data da última edição |
+| criadoEm | string | Sim | Data de criação da anotação |
+| atualizadoEm | string | Sim | Data da última edição |
 
 ## Regras de Segurança (Firebase Realtime Database)
 
@@ -79,10 +81,6 @@ Armazena todas as anotações do usuário
   }
 }
 ```
-
-### Nó Profiles/*UID*/anotacoes/*Id_nota*
-
-Dados de uma anotação específica.
 
 ### Explicação das regras:
 
